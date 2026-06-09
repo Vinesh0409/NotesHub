@@ -16,7 +16,7 @@ const Landing = () => {
 
 				<div className="flex gap-4">
 					<Link to="/login">
-						<div className="px-7 py-3.5 rounded-xl shadow bg-white border-slate-100 text-[16px] font-semibold font-sans cursor-pointer">
+						<div className="px-7 py-3 rounded-xl shadow bg-white border-slate-100 text-[16px] font-semibold font-sans cursor-pointer">
 							<button className=" text-indigo-800 cursor-pointer ">
 								Login
 							</button>
@@ -24,7 +24,7 @@ const Landing = () => {
 					</Link>
 
 					<Link to="/register">
-						<div className="px-7 py-3.5 rounded-xl shadow bg-indigo-800 text-[16px] font-semibold font-sans cursor-pointer">
+						<div className="px-7 py-3 rounded-xl shadow bg-indigo-800 text-[16px] font-semibold font-sans cursor-pointer">
 							<button className=" text-white  cursor-pointer">
 								Get Started
 							</button>
