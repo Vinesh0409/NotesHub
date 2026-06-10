@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Register from './pages/Register'
 import Landing from './pages/Landing'
 
+
 function App() {
   const router = createBrowserRouter([
     {

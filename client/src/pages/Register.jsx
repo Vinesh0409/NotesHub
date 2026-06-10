@@ -2,9 +2,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import logo from "../assets/logo.png";
 import illus from "../assets/register illustration.png";
+import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
 	const [showPassword, setShowPassword] = useState(false);
+	const navigate = useNavigate();
 
 	const {
 		register,
@@ -19,11 +22,12 @@ const Register = () => {
 	});
 
 	const onSubmit = async (data) => {
-		const submit = await axios({
-			method: "post",
-			url: "/api/auth/register",
-			data: data,
-		});
+		try {
+			await axios.post("http://localhost:5000/api/auth/register/", data);
+			navigate("/dashboard", { replace: true });
+		} catch (error) {
+			console.error("Registration failed:", error);
+		}
 	};
 
 	return (
