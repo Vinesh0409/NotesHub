@@ -23,7 +23,7 @@ const Register = () => {
 
 	const onSubmit = async (data) => {
 		try {
-			await axios.post("http://localhost:5000/api/auth/register/", data);
+			await axios.post("http://localhost:3000/api/auth/register/", data);
 			navigate("/dashboard", { replace: true });
 		} catch (error) {
 			console.error("Registration failed:", error);
@@ -42,11 +42,13 @@ const Register = () => {
 				</div>
 
 				<div className="main flex items-center justify-around gap-10 px-6 py-10">
-					<img
-						src={illus}
-						alt="illustration"
-						className="hidden max-w-md lg:block"
-					/>
+					<div className="hidden w-full max-w-md lg:block shrink-0">
+						<img
+							src={illus}
+							alt="illustration"
+							className="w-full h-auto object-contain"
+						/>
+					</div>
 
 					<div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200">
 						<div className="space-y-3 text-center">
