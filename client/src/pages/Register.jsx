@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import logo from "../assets/logo.png";
 import illus from "../assets/register illustration.png";
-import axios from 'axios'
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import Header from "../components/Header";
+import Illustration from "../components/Illustration";
 
 const Register = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -23,32 +25,29 @@ const Register = () => {
 
 	const onSubmit = async (data) => {
 		try {
-			await axios.post("http://localhost:3000/api/auth/register/", data);
+			const res = await axios.post(
+				"http://localhost:3000/api/auth/register/",
+				data,
+			);
+			localStorage.setItem("token", res.data.token);
+			localStorage.setItem("user", res.data.user.name);
+			toast.success("Registration successful!");
 			navigate("/dashboard", { replace: true });
 		} catch (error) {
 			console.error("Registration failed:", error);
+			const errorMsg =
+				error.response?.data?.msg || "Registration failed. Please try again.";
+			toast.error(errorMsg);
 		}
 	};
 
 	return (
 		<div className="min-h-screen flex flex-col font-sans">
 			<div>
-				<div className="px-10 py-4">
-					<img
-						src={logo}
-						alt="logo"
-						className="block h-8 w-auto object-contain md:h-12"
-					/>
-				</div>
+				<Header />
 
-				<div className="main flex items-center justify-around gap-10 px-6 py-10">
-					<div className="hidden w-full max-w-md lg:block shrink-0">
-						<img
-							src={illus}
-							alt="illustration"
-							className="w-full h-auto object-contain"
-						/>
-					</div>
+				<div className="main flex items-centre justify-around gap-10 px-6 py-10">
+					<Illustration illus={illus} />
 
 					<div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200">
 						<div className="space-y-3 text-center">
@@ -58,7 +57,7 @@ const Register = () => {
 							<p className="text-slate-600">Join thousands of students</p>
 						</div>
 
-						<form className="mt-6 space-y-4" onSubmit={handleSubmit(onSubmit)}>
+						<form className="mt-7 space-y-4" onSubmit={handleSubmit(onSubmit)}>
 							<div>
 								<label
 									className="mb-1 block text-sm font-medium text-slate-700"
@@ -134,7 +133,7 @@ const Register = () => {
 									<button
 										type="button"
 										onClick={() => setShowPassword((prev) => !prev)}
-										className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md px-2 py-1 text-sm font-medium text-slate-600 hover:text-slate-900">
+										className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md px-2 py-1 text-sm font-medium text-slate-600 hover:text-slate-900 cursor-pointer">
 										{showPassword ? "Hide" : "View"}
 									</button>
 								</div>
@@ -148,10 +147,18 @@ const Register = () => {
 							<button
 								type="submit"
 								disabled={isSubmitting}
-								className="w-full rounded-lg bg-slate-900 px-4 py-3 font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70">
+								className="w-full rounded-lg bg-slate-900 px-4 py-3 font-medium text-white transition hover:bg-slate-800 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70">
 								{isSubmitting ? "Creating account..." : "Create account"}
 							</button>
 						</form>
+						<div className="text-center text-slate-600 pt-6 pb-3 text-[16px]">
+							already have an account?{" "}
+							<Link to="/login">
+								<span className="text-blue-700 italic font-medium px-1">
+									login
+								</span>
+							</Link>
+						</div>
 					</div>
 				</div>
 			</div>

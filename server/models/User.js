@@ -33,7 +33,6 @@ userSchema.methods.createJWT = function () {
 	return jwt.sign(
 		{
 			userid: this._id,
-			name: this.name,
 		},
 		process.env.SECRET_JWT,
 		{ expiresIn: "1d" },
