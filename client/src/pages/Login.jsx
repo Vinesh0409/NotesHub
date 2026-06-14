@@ -3,8 +3,10 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Illustration from "../components/Illustration";
 import illus from "../assets/login illustration.png";
+import axios from "axios";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, replace, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Login = () => {
 	const [ShowPassword, setShowPassword] = useState(false);
@@ -18,9 +20,20 @@ const Login = () => {
 			password: "",
 		},
 	});
+    const navigate = useNavigate()
 
-    const onSubmit = (data)=>{
-        console.log(data)
+    const onSubmit = async (data)=>{
+        try {
+            const res = await axios.post("http://localhost:3000/api/auth/login/",data);
+            localStorage.setItem("token",res.data.token);
+            localStorage.setItem("user",res.data.user.name);
+            toast.success(`${res.data.user.name}, Logged in `);
+            navigate('/dashboard',{replace:true})
+        } catch (error) {
+            console.error("login failed:", error);
+            const errorMsg = error.response.data.msg;
+            toast.error(errorMsg);
+        }
     }
 
 	return (
@@ -102,7 +115,7 @@ const Login = () => {
 							</div>
 							<button
 								type="submit"
-                                onClick={handleSubmit()}
+                                onClick={handleSubmit(onSubmit)}
 								className="w-full rounded-lg text-white bg-slate-900 py-3 cursor-pointer font-medium hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70">
 								{isSubmitting ? "Logging..." : "Login"}
 							</button>
