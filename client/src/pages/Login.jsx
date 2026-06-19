@@ -27,7 +27,9 @@ const Login = () => {
             const res = await axios.post("http://localhost:3000/api/auth/login/",data);
             localStorage.setItem("token",res.data.token);
             localStorage.setItem("user",res.data.user.name);
-            toast.success(`${res.data.user.name}, Logged in `);
+			let displayName = res.data.user.name;
+			displayName = displayName.split(" ")[0];
+            toast.success(`${displayName}, Logged in `);
             navigate('/dashboard',{replace:true})
         } catch (error) {
             console.error("login failed:", error);
