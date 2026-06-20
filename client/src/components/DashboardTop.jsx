@@ -1,5 +1,7 @@
 import React from "react";
 import logo from "../assets/logo.png";
+import { IoLogOutOutline } from "react-icons/io5";
+
 
 const decodeJWT = (token) => {
 	if (!token) return null;
@@ -36,6 +38,7 @@ const DashboardTop = () => {
 				</div>
 				<div className="ring-1 ring-indigo-600 text-white  font-medium rounded-xl shadow bg-indigo-800 hover:bg-indigo-900">
 					<button className="flex items-center gap-5 px-5 py-2.5 cursor-pointer ">
+						<IoLogOutOutline className="text-2xl"/>
 						<p>Logout</p>
 					</button>
 				</div>

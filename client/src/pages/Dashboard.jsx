@@ -3,12 +3,12 @@ import DashboardTop from "../components/DashboardTop";
 import { FaPlus } from "react-icons/fa6";
 import { IoSearch, IoClose, IoChevronDown } from "react-icons/io5";
 import Dropdown from "../components/Dropdown";
+import NoteBox from "../components/NoteBox";
 
 const Dashboard = () => {
 	const subjects = ["All Subjects", "Hindi", "English", "Maths", "Science"];
-
 	const sortOptions = ["Latest", "Oldest"];
-
+	const subject = "maths";
 
 	return (
 		<div className="min-h-screen flex flex-col font-sans bg-slate-50/30">
@@ -27,8 +27,7 @@ const Dashboard = () => {
 
 				<div className="shadow mt-4 rounded-xl ring-1 ring-slate-100 flex-1 flex flex-col min-h-0 bg-white">
 					<div className="top ">
-						<form
-							className="flex justify-between items-center">
+						<form className="flex justify-between items-center">
 							<div className="relative flex items-center w-1/3">
 								<IoSearch className="absolute left-3 text-slate-400 text-lg" />
 								<input
@@ -43,10 +42,14 @@ const Dashboard = () => {
 								</button>
 							</div>
 							<div className="flex gap-12">
-								<Dropdown options={subjects} sort={false}/>
-								<Dropdown options={sortOptions} sort={true}/>
+								<Dropdown options={subjects} sort={false} />
+								<Dropdown options={sortOptions} sort={true} />
 							</div>
 						</form>
+					</div>
+
+					<div className="py-10 px-10 space-y-0.5">
+						<NoteBox data={{title:"Binary Tree",subject:"Data Structures",time:"2 days ago"}} />
 					</div>
 				</div>
 			</div>
