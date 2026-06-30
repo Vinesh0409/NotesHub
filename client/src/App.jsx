@@ -6,6 +6,7 @@ import { ToastContainer,Bounce } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
+import CreateNote from './pages/CreateNote'
 
 function App() {
   const router = createBrowserRouter([
@@ -24,6 +25,10 @@ function App() {
     {
       path:'/dashboard',
       element:<Dashboard/>
+    },
+    {
+      path:'/createNote',
+      element:<CreateNote/>
     }
   ])
 

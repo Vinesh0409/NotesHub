@@ -4,6 +4,7 @@ import { FaPlus } from "react-icons/fa6";
 import { IoSearch, IoClose, IoChevronDown } from "react-icons/io5";
 import Dropdown from "../components/Dropdown";
 import NoteBox from "../components/NoteBox";
+import { Link } from "react-router";
 
 const Dashboard = () => {
 	const subjects = ["All Subjects", "Hindi", "English", "Maths", "Science"];
@@ -18,10 +19,12 @@ const Dashboard = () => {
 				<div className="flex justify-between items-center">
 					<h1 className="font-bold text-2xl">All Notes</h1>
 					<div className="ring-1 ring-indigo-600 text-white  font-medium rounded-xl shadow bg-indigo-800 hover:bg-indigo-900">
-						<button className="flex items-center gap-5 px-5 py-2.5 cursor-pointer ">
-							<FaPlus />
-							<p>New Note</p>
-						</button>
+						<Link to="/createNote">
+							<button className="flex items-center gap-5 px-5 py-2.5 cursor-pointer ">
+								<FaPlus />
+								<p>New Note</p>
+							</button>
+						</Link>
 					</div>
 				</div>
 
@@ -49,7 +52,13 @@ const Dashboard = () => {
 					</div>
 
 					<div className="py-10 px-10 space-y-0.5">
-						<NoteBox data={{title:"Binary Tree",subject:"Data Structures",time:"2 days ago"}} />
+						<NoteBox
+							data={{
+								title: "Binary Tree",
+								subject: "Data Structures",
+								time: "2 days ago",
+							}}
+						/>
 					</div>
 				</div>
 			</div>
